@@ -1,0 +1,455 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Receipt</title>
+    <style type="text/css">
+        /* http://meyerweb.com/eric/tools/css/reset/ 
+           v2.0 | 20110126
+           License: none (public domain)
+        */
+
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+        }
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+            blockquote:before, blockquote:after,
+            q:before, q:after {
+                content: '';
+                content: none;
+            }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+    </style>
+    <style type="text/css">
+        /*reusable and base styles*/
+
+        body {
+            font-family: Ubuntu, Helvetica, Arial, sans-serif;
+        }
+
+        main {
+            margin: 20px;
+            width: 700px;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: darkblue;
+        }
+
+        .detail-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            font-size: 16px;
+            color: #3c3c3c;
+        }
+
+        .divider {
+            border: 0;
+            border-bottom: 1px solid lightgrey;
+            margin-top: 25px;
+            margin-bottom: 30px;
+        }
+
+        section > h1 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #3c3c3c;  
+            margin-bottom: 20px;
+        }
+
+            section > h1::after {
+                content: ":";
+            }
+
+        section section > h1 {
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+
+        /*specific styles*/
+
+        .header {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: flex;
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            justify-content: space-between;
+        }
+
+            .header__logo {
+                width: 200px;
+            }
+
+            .header__address {
+                font-size: 12px;
+                margin-top: 10px;
+            }
+
+            .header__branding-lines {               
+                height: 140px;
+                margin-right: -10px;
+            }
+
+        .receipt-heading {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: flex;
+            -webkit-box-pack: center; /* wkhtmltopdf uses this one */
+            justify-content: center;
+            width: 60%;
+            margin: 20px auto 30px auto;
+            /*padding-bottom: 20px;
+            border-bottom: 2px dashed lightgrey;*/
+        }
+
+            .receipt-heading__text {
+                font-size: 30px;
+                font-weight: bold;
+                color: #143bc7;                
+                text-transform: uppercase;
+            }
+
+
+        section.barcode-and-receiptno {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: flex;                    
+        }
+
+        /* wkhtmltopdf uses this one */
+        .barcode-wrapper, .receiptno {
+            width: 50%;
+            text-align: center;
+        }
+
+        .barcode {
+            max-width: 200px;
+            max-height: 100px;
+        }
+               
+        .receiptno__label {
+            font-size: 25px;
+            color: #c7b814;
+            font-weight: bold;
+            padding-bottom: 5px;
+        }
+
+        .receiptno__value {
+            font-size: 30px;
+            font-weight: bold;
+            padding-bottom: 15px;
+        }
+
+        section.receipt-info {
+            margin-top: 50px;
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: flex;
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            justify-content: space-between;
+        }
+                
+        section.order-details {                        
+        }
+
+        .bol-info {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: flex;
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            justify-content: space-between;
+        }
+
+        .bolno__value {
+            text-transform: uppercase;
+            color: #143bc7;
+            font-size: 18px;
+            font-weight: bold
+        }
+
+        .bol-charges-wrapper {
+            padding-left: 30px;
+        }
+
+        table.bol-charges {
+            margin-top: 20px;
+            width: 100%;
+            border: 1px solid black;
+        }
+
+            table.bol-charges thead {
+                border-bottom: 1px solid black;                
+            }
+
+            table.bol-charges th {
+                font-size: 18px;
+                font-weight: bold;
+                text-transform: capitalize;
+            }
+
+                table.bol-charges th, .bol-charges td {
+                    text-align: left;
+                    padding: 5px 10px;
+                }
+
+                    table.bol-charges th:last-child, .bol-charges td:last-child {
+                        text-align: right;
+                        width: 150px;
+                    }
+
+            table.bol-charges tfoot {
+                border-top: 2px solid black;                               
+            }
+
+        .payment-info-content {
+            display: -webkit-box; /* wkhtmltopdf uses this one */
+            display: flex;
+            -webkit-box-pack: justify; /* wkhtmltopdf uses this one */
+            justify-content: space-between;
+        }
+
+        .payment-method {
+            padding-right: 40px;
+            border-right: 1px solid lightgray;           
+        }
+
+        section.payment-type > h1::after {
+            content: "";
+        }
+
+        section.billing-address {
+            margin-top: 20px;
+        }
+
+        table.payment-amount td {            
+            padding: 5px 10px;
+        }
+
+        table.payment-amount tr td:last-child {
+            text-align: right;
+        }
+
+        table.payment-amount tr:last-child {
+            font-weight: bold;
+        }
+
+        table.payment-amount tr:last-child td:last-child {
+           border-top: 2px dashed;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <header class="header">
+            <div class="header__logo-and-address">
+                <img class="header__logo" src="{{ReceiptInfo.ImagesBaseUrl}}/EmailImages/kingston_wharves_logo.png" alt="Logo" />
+                <address class="header__address">
+                    Kingston Wharves Limited<br />
+                    195 2nd St., Newport West, Kingston 13, Jamaica W.I.<br />
+                    876-618-1068 | 876-923-9211 | 876-937-9556<br />
+                    <a href="mailto:customer.services@kwljm.com">customer.services@kwljm.com</a><br />
+                    <a href="http://kingstonwharves.com.jm">kingstonwharves.com.jm</a>
+                </address>
+            </div>
+            <img class="header__branding-lines" src="{{ReceiptInfo.ImagesBaseUrl}}/EmailImages/kwl_brandinglines_2.png" alt="Brand Lines" />
+        </header>
+        <article>
+            <header class="receipt-heading">
+                <h1 class="receipt-heading__text">Receipt</h1>
+            </header>
+
+            <section class="barcode-and-receiptno">
+                <div class="barcode-wrapper">
+                    {{#if Bol.BarcodeImageBase64 }}
+                    <img src="data:image/png;base64,{{Bol.BarcodeImageBase64}}" alt="Barcode" />
+                    <div>{{Bol.OrderReference}}</div>
+                    {{/if}}
+                </div>
+                <div class="receiptno">
+                    <div class="receiptno__label">Receipt Number</div>
+                    <div class="receiptno__value">{{ReceiptInfo.ReceiptNumber}}</div>
+                </div>
+            </section>
+
+            <section class="receipt-info">
+                <div class="customer">
+                    <div class="customer__label detail-label">Customer</div>
+                    <div class="customer__name detail-value">{{ReceiptInfo.CustomerName}}</div>
+                </div>
+
+                <div class="payment-date">
+                    <div class="payment-date__label detail-label">Date &amp; Time of Payment</div>
+                    <div class="payment-date__value receipt-info-value">{{ formatDate ReceiptInfo.PaymentDate 'dd/MM/yyyy HH:mm'}}</div>
+                </div>
+
+                <div class="payment-ref">
+                    <div class="payment-ref__label detail-label">Payment Reference</div>
+                    <div class="payment-ref__value detail-value">{{ReceiptInfo.PaymentReference}}</div>
+                </div>
+            </section>
+
+            <hr class="divider" />
+
+            {{#with Bol}}
+            <section class="order-details">
+                <h1>Order Details</h1>
+                <div class="bol-info">
+                    <div class="bolno">
+                        <div class="bolno__label detail-label">Bill of Lading Number</div>
+                        <div class="bolno__value">{{BolNumber}}</div>
+                    </div>
+
+                    <div class="kwl-ref">
+                        <div class="kwl-ref__label detail-label">KWL Reference</div>
+                        <div class="kwl-ref__value detail-value">{{BolReferenceNumber}}</div>
+                    </div>
+
+                    <div class="storage-to-date">
+                        <div class="storage-to-date__label detail-label">Storage to Date</div>
+                        <div class="storage-to-date__value detail-value">{{formatDate this.StorageToDate 'dd/MM/yyyy'}}</div>
+                    </div>
+                </div>
+
+                <div class="bol-charges-wrapper">
+                    <table class="bol-charges">
+                        <thead>
+                            <tr>
+                                <th>Charges</th>
+                                <th>JMD Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each DetailOfCharges}}
+                            <tr>
+                                <td>{{this.Type}}</td>
+                                <td> {{formatNumber this.Amount 'C'}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>TOTAL</td>
+                                <td>{{CurrencyCode}} {{formatNumber Charges 'C'}}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+            {{/with}}
+
+            <hr class="divider" />
+                        
+            <section class="payment-info">
+                <h1>Payment Information</h1>
+                <div class="payment-info-content">
+
+                    {{#with ReceiptInfo}}
+                    <!--left side-->
+                    <div class="payment-method">
+                        <section class="payment-type">
+                            <h1>
+                                Payment Method:
+                                {{#if CreditCardType}}
+                                Credit Card
+                                {{else}}
+                                PayPal
+                                {{/if}}
+                            </h1>
+                            <p>
+                                {{#if CreditCardType}}
+                                {{CreditCardType}} | Last Digits: {{LastCreditCardNumberDigits}}  <br />
+                                Authorization Code: {{AuthorizationCode}} <br />
+                                {{/if}}
+                                Transaction Type: Purchase
+                            </p>
+                        </section>
+
+                        <section class="billing-address">
+                            {{#if BillingAddress}}
+                            <h1>Billing Address</h1>
+                            <address>
+                                {{#with BillingAddress}}
+                                {{FullName}}<br />
+                                {{AddressLine1}}<br />
+                                {{#if AddressLine2}} {{AddressLine2}}<br />{{/if}}
+                                {{City}}<br />
+                                {{#if StateCode}}
+                                {{StateCode}} {{ZipOrPostalCode}}<br />
+                                {{else}}
+                                {{Province}} {{ZipOrPostalCode}}<br />
+                                {{/if}}
+                                {{CountryName}}<br />
+                                {{/with}}
+                            </address>
+                            {{/if}}
+                        </section>
+                    </div>
+                    {{/with}}
+
+                    <!--right side-->
+                    <table class="payment-amount">
+                        <tr>
+                            <td>Charges Subtotal ({{ReceiptInfo.PaymentCurrencyCode}})</td>
+                            <td>{{formatNumber Bol.Charges 'C'}}</td>
+                        </tr>
+                        <tr>
+                            <td>Tax (JMD)</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td>Amount Paid ({{ReceiptInfo.PaymentCurrencyCode}})</td>
+                            <td>{{formatNumber Bol.Charges 'C'}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </section>
+            
+        </article>
+        <footer>   
+            
+        </footer>
+    </main>    
+</body>
+</html>

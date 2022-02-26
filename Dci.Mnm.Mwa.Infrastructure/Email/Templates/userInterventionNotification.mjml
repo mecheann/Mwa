@@ -1,0 +1,76 @@
+<mjml>
+  <mj-body>
+    <mj-container background-color="#E6E6E6">
+      <mj-section padding="10px"></mj-section>
+      <mj-wrapper background-color="white" padding="0" border-radius="10px 10px 0 0">
+        <!-- Header -->
+        <mj-section padding-bottom="0" padding-right="0" padding-top="0">
+          <mj-column width="400px">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/kingston_wharves_logo.png" width="180px" align="left" padding-bottom="0" padding-top="60px" />
+            <mj-text font-size="14px" align="left" color="#999" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-top="10px">
+              195 Second Street, Newport West, Kingston 13, Jamaica <br />
+              876-618-1068 | 876-923-9211 <br />
+              <a href="mailto:customer.services@kwljm.com" style="text-decoration:none">customer.services@kwljm.com</a><br />
+              <a href="http://kingstonwharves.com/" style="text-decoration:none">kingstonwharves.com</a>
+            </mj-text>
+          </mj-column>
+          <mj-column padding-right="0" width="200px">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/kwl_brandinglines_2.png" width="180px" align="right" padding-bottom="0" padding-right="0" />
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding-top="0" padding-bottom="0">
+          <mj-column width="100%">
+            <mj-spacer height="20" />
+            <mj-text font-size="40px" align="center" color="#143bc7" font-family="Ubuntu, Helvetica, Arial, sans-serif">
+              Submission Update!
+            </mj-text>
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding="0">
+          <mj-column width="100%">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/exclamation_icon.png" width="100" padding="0" />
+          </mj-column>
+        </mj-section>
+
+        <!-- Content -->
+        <mj-section padding="0">
+          <mj-column width="100%">
+            <mj-text font-size="18px" color="#3c3c3c" align="center" font-family="Ubuntu, Helvetica, Arial, sans-serif">
+              Your submission requires an update. Please see below instructions for adjusting your submission.
+            </mj-text>
+            <mj-divider border-width="3px" border-style="dashed" border-color="lightgrey" width="300" />
+          </mj-column>
+        </mj-section>
+        <mj-section padding-bottom="0">
+          <mj-column>
+            <mj-text color="#3c3c3c" font-size="11px" font-family="Helvetica, Arial, sans-serif" padding-bottom="0">
+              [BL #]
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="14px" font-family="Helvetica, Arial, sans-serif" padding-top="0">
+              {{BolNumber}}
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="11px" font-family="Helvetica, Arial, sans-serif" padding-bottom="0">
+              Comment
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="14px" font-family="Helvetica, Arial, sans-serif" padding-top="0">{{Comment}}</mj-text>
+          </mj-column>
+          <mj-column>
+            <mj-text color="#3c3c3c" font-size="11px" font-family="Helvetica, Arial, sans-serif" padding-bottom="0">
+              [Date &amp; Time]
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="14px" font-family="Helvetica, Arial, sans-serif" padding-top="0">
+              {{ formatDate Date 'dd/MM/yyyy HH:mm'}}
+            </mj-text>
+          </mj-column>
+        </mj-section>
+
+      </mj-wrapper>
+      <mj-section background-color="#ECBF00" border-radius="0 0 10px 10px" padding="10">
+        <mj-column width="100%"></mj-column>
+      </mj-section>
+      <mj-section padding="10px"></mj-section>
+    </mj-container>
+  </mj-body>
+</mjml>

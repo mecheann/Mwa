@@ -1,0 +1,159 @@
+﻿<mjml>
+  <mj-head>
+    <mj-style>
+      .detail-table td,
+      .detail-table tr {
+        word-break: break-all;
+        margin-left: 1px;
+      }
+
+      table.detail-table {
+        page-break-before: always;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body width="1200px">
+    <mj-section full-width padding="0px">
+      <mj-column width="35%">
+      </mj-column>
+      <mj-column width="65%">
+        <mj-text vertical-align="middle" align="left" color="#ff4aad" font-size="20px" font-family="Ubuntu, Helvetica, Arial, sans-serif" font-weight="bold">
+          <b>COMMISSION INCOME / STATEMENT</b>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section full-width padding-bottom="1px">
+      <mj-column width="25%">
+        <mj-text color="#53656e" font-size="17px" font-family="Helvetica, Arial, sans-serif" padding-top="0" font-weight="bold">{{AgentName}}</mj-text>
+        <mj-text color="#53656e" font-size="13px" font-family="Helvetica, Arial, sans-serif" padding-top="0">{{Address}}</mj-text>
+      </mj-column>
+      <mj-column width="10%" />
+      <mj-column width="25%">
+        <mj-text color="#53656e" font-size="13px" font-family="Helvetica, Arial, sans-serif" padding-top="0"> TAX INVOICE #: {{TaxInvoiceNumber}}</mj-text>
+        <mj-raw>
+          <!-- htmlmin:ignore --> {{#if GctRegNumber}}
+            <!-- htmlmin:ignore -->
+        </mj-raw>
+        <mj-text color="#53656e" font-size="13px" font-family="Helvetica, Arial, sans-serif" padding-top="0">GCT REG. #: {{GctRegNumber}}</mj-text>
+        <mj-raw>
+          <!-- htmlmin:ignore -->{{/if}}<!-- htmlmin:ignore -->
+        </mj-raw>
+        <mj-text color="#53656e" font-size="13px" font-family="Helvetica, Arial, sans-serif" padding-top="0">Date: {{Date}}</mj-text>
+        <mj-text color="#53656e" font-size="13px" font-family="Helvetica, Arial, sans-serif" padding-top="0">Generates as of: {{formatDate ReportDate 'MMMM d, yyyy HH:mm'}}</mj-text>
+        <mj-text color="#53656e" font-size="13px" font-family="Helvetica, Arial, sans-serif" padding-top="0">Agent #: {{VendorAccountNumber}}</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <!-- Detail Table -->
+    <mj-section full-width>
+      <mj-column width="100%">
+        <mj-table table-layout="auto" width="100%" css-class="detail-table">
+          <tr style="background:#ff4aad;color:white;border:1px solid black;border-bottom:none;font-size:12px;font-weight:bold;text-align:center">
+            <td style="border-right: 1px solid black;"></td>
+            <td style="border-right: 1px solid black;" colspan="4">MONEYGRAM</td>
+            <td style="border-right: 1px solid black;" colspan="3">RIA</td>
+            <td style="border-right: 1px solid black;" colspan="2">LASCOPAY</td>
+            <td style="border-right: 1px solid black;" colspan="2">BILLPAY</td>
+            <td style="border-right: 1px solid black;">RPJ</td>
+            <td>Total Commission</td>
+          </tr>
+          <tr style="border-left: 1px solid black;border-right: 1px solid black;font-size:12px;text-align:left">
+            <td style="border-right: 1px solid black;">Date </td>
+            <td> Net Send Amt</td>
+            <td>Net Recv. Amt </td>
+            <td> Fees Comm.</td>
+            <td style="border-right: 1px solid black;"> Base Comm.</td>
+            <td> Net Recv. Amt</td>
+            <td> Fees Comm.</td>
+            <td style="border-right: 1px solid black;">Payout Comm.</td>
+            <td>Trans. Count</td>
+            <td style="border-right: 1px solid black;">Comm. </td>
+            <td>Trans. Count </td>
+            <td style="border-right: 1px solid black;">Comm. </td>
+            <td style="border-right: 1px solid black;">Comm. </td>
+            <td> </td>
+          </tr>
+          {{#each MonthlyAgentDailyResults}}
+            <tr style="border-left: 1px solid black;border-right: 1px solid black;text-align:left;font-size:12px;">
+              <td style="border-right: 1px solid black;">{{formatDate this.Date 'd MMM yyyy'}}</td>
+              <td>{{formatNumber this.MoneygramNetSentAmt 'C'}}</td>
+              <td>{{formatNumber this.MoneygramNetReceiveAmt 'C'}}</td>
+              <td>{{formatNumber this.MoneygramFee 'C'}}</td>
+              <td style="border-right: 1px solid black;">{{formatNumber this.MoneygramCommission 'C'}}</td>
+              <td>{{formatNumber this.RiaNetReceiveAmt 'C'}}</td>
+              <td>{{formatNumber this.RiaFeeCommission 'C'}}</td>
+              <td style="border-right: 1px solid black;">{{formatNumber this.RiaCommission 'C'}}</td>
+              <td>{{this.LascoPayTranCount}}</td>
+              <td style="border-right: 1px solid black;">{{formatNumber this.LascoPayCommission 'C'}}</td>
+              <td>{{this.BillPayTranCount}}</td>
+              <td style="border-right: 1px solid black;">{{formatNumber this.BillPayCommission 'C'}}</td>
+              <td style="border-right: 1px solid black;">{{formatNumber this.RPJCommission 'C'}}</td>
+              <td>{{formatNumber this.TotalCommission 'C'}}</td>
+            </tr>
+          {{/each}}
+          <tr style="border: 1px solid black;text-align:left;font-size:12px;">
+            <td style="border-right: 1px solid black;">Total</td>
+            <td>{{formatNumber this.MoneygramNetSendAmtTotal 'C'}}</td>
+            <td>{{formatNumber this.MoneygramNetRecvAmtTotal 'C'}}</td>
+            <td>{{formatNumber this.MoneygramFeeTotal 'C'}}</td>
+            <td style="border-right: 1px solid black;">{{formatNumber this.MoneygramCommissionTotal 'C'}}</td>
+            <td>{{formatNumber this.RiaNetRecvAmtTotal 'C'}}</td>
+            <td>{{formatNumber this.RiaFeeTotal 'C'}}</td>
+            <td style="border-right: 1px solid black;">{{formatNumber this.RiaCommissionTotal 'C'}}</td>
+            <td>{{this.LascoPayTranCountTotal}}</td>
+            <td style="border-right: 1px solid black;">{{formatNumber this.LascoPayCommissionTotal 'C'}}</td>
+            <td>{{this.BillPayTranCountTotal}}</td>
+            <td style="border-right: 1px solid black;">{{formatNumber this.BillPayCommissionTotal 'C'}}</td>
+            <td style="border-right: 1px solid black;">{{formatNumber this.RPJCommissionTotal 'C'}}</td>
+            <td>{{formatNumber this.TotalCommission 'C'}}</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- Summary Table -->
+    <mj-section padding="0px">
+      <mj-column>
+        <mj-table cellpadding="2px" width="40%">
+          <tr style="border:1px solid black; text-align:left">
+            <td style="border-right:1px solid black;">Total Moneygram Fee Commission</td>
+            <td style="text-align:right;"> {{formatNumber MoneygramFeeTotal 'C'}} </td>
+          </tr>
+          <tr style="border:1px solid black;text-align:left;">
+            <td style="border-right:1px solid black;">Total Moneygram Base Commission</td>
+            <td style="text-align:right;">{{formatNumber MoneygramCommissionTotal 'C'}}</td>
+          </tr>
+          <tr style="border:1px solid black;text-align:left;">
+            <td style="border-right:1px solid black;">Total Ria Payout Commission</td>
+            <td style="text-align:right;">{{formatNumber RiaCommissionTotal 'C'}}</td>
+          </tr>
+          <tr style="border:1px solid black; text-align:left">
+            <td style="border-right:1px solid black;">Total Ria Fee Commission</td>
+            <td style="text-align:right;"> {{formatNumber RiaFeeCommissionTotal 'C'}} </td>
+          </tr>
+
+          <tr style="border:1px solid black; text-align:left">
+            <td style="border-right:1px solid black;">LascoPay Commission</td>
+            <td style="text-align:right;">{{formatNumber LascoPayCommissionTotal 'C'}}</td>
+          </tr>
+          <tr style="border:1px solid black; text-align:left">
+            <td style="border-right:1px solid black;">BillPay Commission</td>
+            <td style="text-align:right;">{{formatNumber BillPayCommissionTotal 'C'}}</td>
+          </tr>
+          <tr style="border:1px solid black; text-align:left">
+            <td style="border-right:1px solid black;">GCT</td>
+            <td style="text-align:right;"> {{formatNumber Gct 'C'}} </td>
+          </tr>
+          <tr style="border:1px solid black; text-align:left">
+            <td style="border-right:1px solid black;">Total Commission + GCT </td>
+            <td style="text-align:right;">{{formatNumber CommissionGctTotal 'C'}}</td>
+          </tr>
+        </mj-table>
+      </mj-column>
+    </mj-section>
+
+    <!-- </mj-wrapper>
+    </mj-container> -->
+  </mj-body>
+</mjml>

@@ -8,5 +8,6 @@ namespace Dci.Mnm.Mwa.Domain
 {
     public class Operation
     {
+        public string Name { get; set; }
     }
 }

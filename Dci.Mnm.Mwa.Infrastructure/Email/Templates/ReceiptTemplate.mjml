@@ -1,0 +1,234 @@
+﻿<mjml>
+  <mj-body>
+    <mj-container background-color="#E6E6E6">
+      <mj-section padding="10px"></mj-section>
+      <mj-wrapper background-color="white" padding="0" border-radius="10px 10px 0 0">
+        <!-- Header -->
+        <mj-section padding-bottom="0" padding-right="0" padding-top="0">
+          <mj-column width="400px">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/kingston_wharves_logo.png" width="180px" align="left" padding-bottom="0" padding-top="60px" />
+            <mj-text font-size="14px" align="left" color="#999" font-family="Ubuntu, Helvetica, Arial, sans-serif" padding-top="10px">
+              195 Second Street, Newport West, Kingston 13, Jamaica<br />
+              876-618-1068 | 876-923-9211 <br />
+              <a href="mailto:customer.services@kwljm.com" style="text-decoration:none">customer.services@kwljm.com</a><br />
+              <a href="http://kingstonwharves.com/" style="text-decoration:none">kingstonwharves.com</a>
+            </mj-text>
+          </mj-column>
+          <mj-column padding-right="0" width="200px">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/kwl_brandinglines_2.png" width="180px" align="right" padding-bottom="0" padding-right="0" />
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding-top="0" padding-bottom="0">
+          <mj-column width="100%">
+            <mj-spacer height="20" />
+            <mj-text font-size="40px" align="center" color="#143bc7" font-family="Ubuntu, Helvetica, Arial, sans-serif">
+              Thank You!
+            </mj-text>
+            <mj-text font-size="18px" font-weight="bold" align="center" color="#C7B814" font-family="Ubuntu, Helvetica, Arial, sans-serif">
+              Your Payment has been received
+            </mj-text>
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding="0">
+          <mj-column width="100%">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/check_icon.png" width="100" padding="0" />
+          </mj-column>
+        </mj-section>
+
+        <!-- Content -->
+        <mj-section padding="0">
+          <mj-column width="100%">
+            <mj-text font-size="18px" color="#3c3c3c" align="center" font-family="Ubuntu, Helvetica, Arial, sans-serif">
+              This email confirms that your payment has been received. {{#if ReceiptNumber}} Your receipt is attached. Please retain for your records and present to the wharf, along with the original shipping documents, when coming to clear goods.{{/if}}
+            </mj-text>
+            <mj-divider border-width="3px" border-style="dashed" border-color="lightgrey" width="300" />
+          </mj-column>
+        </mj-section>
+
+        <!-- Receipt Number -->
+        <mj-section padding-top="0">
+          <mj-column width="100%">
+            <mj-text align="center" font-size="28px" color="#c7b814">
+              <b>Receipt Number:</b>
+            </mj-text>
+            <mj-text align="center" color="#3c3c3c">
+              {{#if ReceiptNumber}}
+                <b style="font-size:20px">{{ReceiptNumber}}</b>
+              {{else}}
+                <span style="color:#d7351c; font-size:14px; font-family:Ubuntu, Helvetica, Arial, sans-serif">Your receipt could not be generated. Please present the payment reference number <b>({{PaymentReference}})</b> to Customer Service</span>
+              {{/if}}
+            </mj-text>
+          </mj-column>
+        </mj-section>
+
+        <!-- Customer name and Payment Reference Number-->
+
+        <mj-section padding-bottom="0">
+          <mj-column>
+            <mj-text color="#3c3c3c" font-size="11px" font-family="Helvetica, Arial, sans-serif" padding-bottom="0">
+              Customer
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="14px" font-family="Helvetica, Arial, sans-serif" padding-top="0">{{CustomerName}}</mj-text>
+          </mj-column>
+          <mj-column>
+            <mj-text color="#3c3c3c" font-size="11px" font-family="Helvetica, Arial, sans-serif" padding-bottom="0">
+              Date &amp; Time of Payment
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="14px" font-family="Helvetica, Arial, sans-serif" padding-top="0">{{ formatDate PaymentDate 'dd/MM/yyyy HH:mm'}}</mj-text>
+          </mj-column>
+          <mj-column>
+            <mj-text color="#3c3c3c" font-size="11px" font-family="Helvetica, Arial, sans-serif" padding-bottom="0">
+              Payment Reference Number
+            </mj-text>
+            <mj-text color="#3c3c3c" font-size="14px" font-family="Helvetica, Arial, sans-serif" padding-top="0" font-weight="bold">{{PaymentReference}}</mj-text>
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding="0">
+          <mj-column>
+            <mj-divider border-width="1px" border-style="solid" border-color="lightgrey" width="100%" />
+          </mj-column>
+        </mj-section>
+
+        <!-- Order Details -->
+
+        <mj-section padding-top="0" padding-bottom="0">
+          <mj-column width="80%">
+            <mj-text>
+              <b style="font-size:20px; color:#3c3c3c">Order Details:</b>
+            </mj-text>
+          </mj-column>
+          <mj-column width="20%">
+            <!--<mj-image src="{{ImagesBaseUrl}}/EmailImages/paidbill.png"  width="50" />-->
+          </mj-column>
+          <mj-column width="100%">
+            <mj-table>
+              <tr style="font-size:11px">
+                <td>
+                  Bill of Lading Number
+                </td>
+                <td>
+                  KWL Reference
+                </td>
+                <!--<td style="text-align:right">-->
+                <!--  Vessel Arrival Date-->
+                <!--</td>-->
+                <td style="text-align:right">
+                  Storage to Date
+                </td>
+              </tr>
+              {{#each Items}}
+                <tr style="font-size:14px;">
+                  <td style="text-transform:uppercase; color:#143bc7;font-size:18px;font-weight:bold">{{this.BolNumber}}</td>
+                  <td>{{this.BolReferenceNumber}}</td>
+                  <!--<td style="text-align:right">{{formatDate this.VesselArrivalDate 'dd/MM/yyyy'}}</td>-->
+                  <td style="text-align:right">{{formatDate this.StorageToDate 'dd/MM/yyyy'}}</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <!--<td></td>-->
+                  <td style="text-align:right;padding-bottom:10px;font-size:14px;">Charges ({{this.CurrencyCode}}):</td>
+                  <td style="text-align:right;padding-bottom:10px;font-size:14px;">
+                    {{formatNumber this.Charges 'C'}}
+                  </td>
+                </tr>
+              {{/each}}
+              <tr style="font-size:14px">
+                <td></td>
+                <!--<td></td>-->
+                <td style="font-size:14px;font-weight:bold;text-align:right;padding-top:15px">Order Total ({{ChargesCurrencyCode}}):</td>
+                <td style="font-size:16px;font-weight:bold;text-align:right;padding-top:15px">{{formatNumber TotalCharges 'C'}}</td>
+              </tr>
+            </mj-table>
+          </mj-column>
+        </mj-section>
+
+        <!-- Payment Information -->
+
+        <mj-section padding="0">
+          <mj-column>
+            <mj-divider border-width="1px" border-style="solid" border-color="lightgrey" width="100%" />
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding="0">
+          <mj-column width="80%">
+            <mj-text>
+              <b style="font-size:20px; color:#3c3c3c">Payment Information:</b>
+            </mj-text>
+          </mj-column>
+          <mj-column width="20%">
+            <mj-image src="{{ImagesBaseUrl}}/EmailImages/paidbill.png" width="50" />
+          </mj-column>
+        </mj-section>
+
+        <mj-section padding="0" padding-bottom="10px">
+          <mj-column border-right="1px solid lightgrey" width="40%">
+            <mj-text padding-bottom="0" padding-top="0">
+              <b style="font-size:14px; color:#3c3c3c">
+                Payment Method:
+                {{#if CreditCardType}}
+                  Credit Card
+                {{else}}
+                  PayPal
+                {{/if}}
+              </b>
+            </mj-text>
+            {{#if CreditCardType}}
+              <mj-text padding-top="0" padding-bottom="0">
+                {{CreditCardType}} | Last Digits: {{LastCreditCardNumberDigits}}
+                <br />
+                Authorization Code: {{AuthorizationCode}}
+              </mj-text>
+            {{/if}}
+            <mj-text padding-top="0">
+              Transaction Type: Purchase
+            </mj-text>
+            <mj-text padding-bottom="0">
+              {{#if BillingAddress}}
+                <b style="font-size:14px; color:#3c3c3c">Billing Address:</b><br />
+                {{#with BillingAddress}}
+                  {{FullName}}<br />
+                  {{AddressLine1}}<br />
+                  {{#if AddressLine2}} {{AddressLine2}}<br />{{/if}}
+                  {{City}}<br />
+                  {{#if StateCode}}
+                    {{StateCode}} {{ZipOrPostalCode}}<br />
+                  {{else}}
+                    {{Province}} {{ZipOrPostalCode}}<br />
+                  {{/if}}
+                  {{CountryName}}<br />
+                {{/with}}
+              {{/if}}
+            </mj-text>
+          </mj-column>
+          <mj-column width="60%">
+            <mj-table>
+              <tr>
+                <td align="right" style="font-size:14px">Item(s) Subtotal ({{PaymentCurrencyCode}}):</td>
+                <td align="right" style="font-size:14px">{{formatNumber TotalPaid 'C'}}</td>
+              </tr>
+              <tr>
+                <td align="right" style="font-size:14px">Tax ({{PaymentCurrencyCode}}):</td>
+                <td align="right" style="padding-left:20px;font-size:14px">
+                  <div style="border-bottom:1px dashed;">$0.00</div>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" style="font-size:16px;font-weight:bold">Amount Paid ({{PaymentCurrencyCode}}):</td>
+                <td align="right" style="font-size:16px;font-weight:bold">{{formatNumber TotalPaid 'C'}}</td>
+              </tr>
+            </mj-table>
+          </mj-column>
+        </mj-section>
+
+      </mj-wrapper>
+      <mj-section background-color="#ECBF00" border-radius="0 0 10px 10px" padding="10">
+        <mj-column width="100%"></mj-column>
+      </mj-section>
+      <mj-section padding="10px"></mj-section>
+    </mj-container>
+  </mj-body>
+</mjml>
