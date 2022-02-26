@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".",
+			"name": "Root"
+		},
+		{
+			"path": "Dci.Mnm.Mwa.Web\\Dci.Mnm.Mwa.Web.React",
+			"name": "React"
+		},
+		{
+			"path": "Dci.Mnm.Mwa.Service",
+			"name": "Service"
+		}
+	],
+	"settings": {}
+}

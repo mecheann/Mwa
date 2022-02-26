@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="33.1.1" />
+    <PackageReference Include="LinqKit.Microsoft.EntityFrameworkCore" Version="5.0.26" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Core\Dci.Mnm.Mwa.Core.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Domain\Dci.Mnm.Mwa.Domain.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Infrastructure.Core\Dci.Mnm.Mwa.Infrastructure.Core.csproj" />
+  </ItemGroup>
+
+</Project>

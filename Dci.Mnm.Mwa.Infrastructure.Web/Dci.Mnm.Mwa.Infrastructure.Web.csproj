@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Core\Dci.Mnm.Mwa.Core.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Domain\Dci.Mnm.Mwa.Domain.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Infrastructure.Core\Dci.Mnm.Mwa.Infrastructure.Core.csproj" />
+  </ItemGroup>
+
+</Project>

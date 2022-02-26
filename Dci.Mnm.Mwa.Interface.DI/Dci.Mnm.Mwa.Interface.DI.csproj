@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LocalizationProvider.AdminUI.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="LocalizationProvider.AspNetCore" Version="6.5.0" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="MySql.Data.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.4" />
+    <PackageReference Include="NSwag.CodeGeneration.TypeScript" Version="13.13.2" />
+    <PackageReference Include="Scrutor" Version="3.3.0" />
+    <PackageReference Include="SimpleInjector" Version="5.3.2" />
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore" Version="5.3.0" />
+    <PackageReference Include="SimpleInjector.Integration.AspNetCore.Mvc.Core" Version="5.3.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.2.3" />
+    <PackageReference Include="Topshelf" Version="4.3.0" />
+    <PackageReference Include="Topshelf.MicrosoftDependencyInjection" Version="1.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Application\Dci.Mnm.Mwa.Application.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Core\Dci.Mnm.Mwa.Core.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Domain\Dci.Mnm.Mwa.Domain.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Infrastructure.Core\Dci.Mnm.Mwa.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Infrastructure.Data\Dci.Mnm.Mwa.Infrastructure.Data.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Infrastructure.Web\Dci.Mnm.Mwa.Infrastructure.Web.csproj" />
+    <ProjectReference Include="..\Dci.Mnm.Mwa.Infrastructure\Dci.Mnm.Mwa.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
